@@ -3,7 +3,7 @@ const BASE_URL = "http://localhost:8000/";
 const getInit = (token) => {
   return {
     headers: {
-      "Content-Type": "applicaton/json",
+      "Content-Type": "application/json",
       Authorization: `JWT ${token}`,
     },
   };
@@ -50,15 +50,70 @@ const signUpUser = async (userObject) => {
   return await tryCatchFetch(url, init);
 };
 
-const displayHomePage = async (token) => {
-  let url = "http://localhost:3000/";
+const getStates = async (token) => {
+  let url = `${BASE_URL}api/states/`;
   return await tryCatchFetch(url, getInit(token));
+};
+
+const createState = async (newStateParams, token) => {
+  let url = `${BASE_URL}api/states/`;
+  let init = getInit(token);
+  init["method"] = "POST";
+  init["body"] = JSON.stringify(newStateParams);
+  return await tryCatchFetch(url, init);
+};
+
+const deleteState = async (stateId, token) => {
+  let url = `${BASE_URL}api/states/${stateId}/`;
+  let init = getInit(token);
+  init["method"] = "DELETE";
+  return await tryCatchFetch(url, init);
+};
+
+const getStateById = async (stateId, token) => {
+  let url = `${BASE_URL}api/states/${stateId}/`;
+  return await tryCatchFetch(url, getInit(token));
+};
+
+const getCityById = async (cityId, token) => {
+  let url = `${BASE_URL}api/cities/`;
+  return await tryCatchFetch(url, getInit(token));
+};
+
+const addCity = async (newCityParams, token) => {
+  let url = `${BASE_URL}api/cities/`;
+  let init = getInit(token);
+  init["method"] = "POST";
+  init["body"] = JSON.stringify(newCityParams);
+  return await tryCatchFetch(url, init);
+};
+
+const updateCity = async (cityId, updatedCity, token) => {
+  let url = `${BASE_URL}api/cities/${cityId}/`;
+  let init = getInit(token);
+  init["method"] = "PUT";
+  init["body"] = JSON.stringify(updatedCity);
+  return await tryCatchFetch(url, init);
+};
+
+const deleteCity = async (cityId, token) => {
+  let url = `${BASE_URL}api/cities/${cityId}/`;
+  let init = getInit(token);
+  init["method"] = "DELETE";
+  return await tryCatchFetch(url, init);
 };
 
 const myExports = {
   doLogin,
   signUpUser,
-  displayHomePage,
+  getStates,
+  createState,
+  deleteState,
+  getStateById,
+  getCityById,
+  addCity,
+  updateCity,
+  deleteCity,
 };
 
 export default myExports;

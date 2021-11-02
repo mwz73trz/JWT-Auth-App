@@ -8,10 +8,10 @@ class State(models.Model):
     def __str__(self):
         return f"{self.name}"
 
-class Capital(models.Model):
+class City(models.Model):
+    state = models.ForeignKey(State, on_delete=models.CASCADE, related_name="cities")
     name = models.CharField(max_length=100)
     been = models.BooleanField(default=False)
-    state = models.ForeignKey(State, on_delete=models.CASCADE, related_name="capitals")
 
     def __str__(self):
-        return f"{self.user} has been to {self.name}"
+        return f"{self.name}"

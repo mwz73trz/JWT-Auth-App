@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import StateCitiesPage from "./pages/StateCitiesPage";
+import CityPage from "./pages/CityPage";
 import UserContext from "./contexts/UserContext";
 
 class App extends Component {
@@ -28,6 +30,16 @@ class App extends Component {
               <Route path="/" exact component={HomePage} />
               <Route path="/login" exact render={this.renderLoginPage} />
               <Route path="/login/users" exact component={SignupPage} />
+              <Route
+                path="/states/:stateId"
+                exact
+                component={StateCitiesPage}
+              />
+              <Route
+                path="/states/:stateId/cities/:cityId"
+                exact
+                component={CityPage}
+              />
             </div>
           </UserContext.Provider>
         </Router>
